@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 public class Classroom { // 강의실 변수 클래스
 
     private String roomName; // 강의실 이름 변수 ex)1212, 10312
+    public Classroom() {}
     public Classroom(String n) { // 강의실 변수 클래스 생성자
         this.roomName=n;
     }
