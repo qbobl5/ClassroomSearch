@@ -43,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
                 TextView text = (TextView)findViewById(R.id.txtresult);
                 Classroom key=new Classroom(query);
                 String value=key.building();
-                text.setText(query+" : "+value);
+                if(value.equals("존재하지 않습니다.")) text.setText(value);
+                else {
+                    int value2=key.thisFloor();
+                    text.setText(query+" : "+value+" ("+value2+"층)");
+                }
                 return true;
             }
 

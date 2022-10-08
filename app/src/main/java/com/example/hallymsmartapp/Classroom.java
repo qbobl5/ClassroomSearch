@@ -1,13 +1,16 @@
 package com.example.hallymsmartapp;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 public class Classroom { // 강의실 변수 클래스
 
-    private Object roomName; // 강의실 이름 변수 ex)1212, 10312
-    public Classroom(Object n) { // 강의실 변수 클래스 생성자
+    private String roomName; // 강의실 이름 변수 ex)1212, 10312
+    public Classroom(String n) { // 강의실 변수 클래스 생성자
         this.roomName=n;
     }
 
-    public void setRoomName(Object n) {
+    public void setRoomName(String n) {
         this.roomName=n;
     }
 
@@ -16,12 +19,20 @@ public class Classroom { // 강의실 변수 클래스
     }
 
     public String building() { // 강의실 이름을 받아온 뒤 건물명 찾기
-        if (roomName.toString().charAt(0) == 'A') {
+        if (roomName.charAt(0) == 'A') {
             // A로 시작하는 건물 표시
             return null;
         }
 
-        switch (Integer.parseInt(roomName.toString()) / 1000) {
+        for(int i=0;i<roomName.length();i++) { // 건물에 숫자 안 들어가는 경우 예외처리
+            boolean error=true;
+            for(int j=48;j<=57;j++) {
+                if(roomName.charAt(i)==(char)j) error=false;
+            }
+            if(error==true) return "존재하지 않습니다.";
+        }
+
+        switch (Integer.parseInt(roomName) / 1000) {
             case 1:
                 return "공학관";
             case 2:
@@ -103,6 +114,11 @@ public class Classroom { // 강의실 변수 클래스
             default:
                 return "존재하지 않습니다.";
         }
+    }
+
+    public int thisFloor() { // 층 수 구하기
+        if(roomName.length()==4) return (int)roomName.charAt(1)-48;
+        else return (int)roomName.charAt(2)-48;
     }
 
 }
